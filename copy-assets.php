@@ -12,7 +12,11 @@ if (!is_dir($rootDir . '/vendor') && is_dir(dirname($parent) . '/vendor')) {
     $rootDir = dirname($parent);
 }
 
-require $rootDir . '/vendor/autoload.php';
+if (is_dir($rootDir . '/vendor')) {
+    require $rootDir . '/vendor/autoload.php';
+} else {
+    require __DIR__ . '/vendor/autoload.php';
+}
 
 $fileSystem = new \Symfony\Component\Filesystem\Filesystem();
 $publicAssetPath = $rootDir . '/public/recovery';
